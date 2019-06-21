@@ -1,7 +1,9 @@
 package com.example.shockquakev2;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
+import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.view.LayoutInflater;
@@ -48,6 +50,7 @@ public class QuakeAdapter extends ArrayAdapter<EarthQuake>
 
         String dateTxt = GetDate1(currentQuake.getDate());
         String timeTxt = GetTime1(currentQuake.getDate());
+
         if (isContainKm(currentQuake.getLocation()))
         {
             locTxtTop = GetLocTop(currentQuake.getLocation());
