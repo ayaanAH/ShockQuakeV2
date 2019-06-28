@@ -62,9 +62,12 @@ public final class Utils
 
         // Perform HTTP request to the URL and receive a JSON response back
         String jsonResponse = null;
-        try {
+        try
+        {
             jsonResponse = makeHttpRequest(url);
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             Log.e(LOG_TAG, "Error closing input stream", e);
         }
 
@@ -79,11 +82,15 @@ public final class Utils
     /**
      * Returns new URL object from the given string URL.
      */
-    private static URL createUrl(String stringUrl) {
+    public static URL createUrl(String stringUrl)
+    {
         URL url = null;
-        try {
+        try
+        {
             url = new URL(stringUrl);
-        } catch (MalformedURLException e) {
+        }
+        catch (MalformedURLException e)
+        {
             Log.e(LOG_TAG, "Error with creating URL ", e);
         }
         return url;
@@ -96,13 +103,15 @@ public final class Utils
         String jsonResponse = "";
 
         // If the URL is null, then return early.
-        if (url == null) {
+        if (url == null)
+        {
             return jsonResponse;
         }
 
         HttpURLConnection urlConnection = null;
         InputStream inputStream = null;
-        try {
+        try
+        {
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setReadTimeout(10000 /* milliseconds */);
             urlConnection.setConnectTimeout(15000 /* milliseconds */);
@@ -111,19 +120,28 @@ public final class Utils
 
             // If the request was successful (response code 200),
             // then read the input stream and parse the response.
-            if (urlConnection.getResponseCode() == 200) {
+            if (urlConnection.getResponseCode() == 200)
+            {
                 inputStream = urlConnection.getInputStream();
                 jsonResponse = readFromStream(inputStream);
-            } else {
+            }
+            else
+            {
                 Log.e(LOG_TAG, "Error response code: " + urlConnection.getResponseCode());
             }
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             Log.e(LOG_TAG, "Problem retrieving the earthquake JSON results.", e);
-        } finally {
-            if (urlConnection != null) {
+        }
+        finally
+        {
+            if (urlConnection != null)
+            {
                 urlConnection.disconnect();
             }
-            if (inputStream != null) {
+            if (inputStream != null)
+            {
                 inputStream.close();
             }
         }
@@ -156,7 +174,8 @@ public final class Utils
     {
         ArrayList<EarthQuake> earthquake= new ArrayList<>();
         // If the JSON string is empty or null, then return early.
-        if (TextUtils.isEmpty(earthquakeJSON)) {
+        if (TextUtils.isEmpty(earthquakeJSON))
+        {
             return null;
         }
 

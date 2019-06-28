@@ -20,9 +20,9 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity
 {
 
-    private static final String USGS_REQUEST_URL = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-01-01&endtime=2016-05-02&minfelt=50&minmagnitude=3";
+    private static final String USGS_REQUEST_URL = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-01-01&endtime=2016-05-02&minfelt=50&minmagnitude=1";
     ListView quakeListView;
-    ArrayList<EarthQuake> list;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -40,15 +40,20 @@ public class MainActivity extends AppCompatActivity
     {
         switch (item.getItemId())
         {
-            case R.id.refreshMenu : String x="reset";
+            case R.id.refreshMenu:
+                String x = "reset";
                 return true;
-            case R.id.ShareSSt  : String y="shareScreenShot";
+            case R.id.settings:
+                Intent i = new Intent(getApplicationContext(), SettingsActivity.class);
+                startActivity(i);
                 return true;
 
-            default:return super.onOptionsItemSelected(item);
+            default:
+                return super.onOptionsItemSelected(item);
         }
 
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
@@ -59,10 +64,9 @@ public class MainActivity extends AppCompatActivity
 
     private void updateUi(ArrayList<EarthQuake> earthquake)
     {
-        list=earthquake;
 
-        quakeListView=findViewById(R.id.quakeList);
-        final QuakeAdapter qAdapter=new QuakeAdapter(this,list);
+        quakeListView = findViewById(R.id.quakeList);
+        final QuakeAdapter qAdapter = new QuakeAdapter(this, earthquake);
         quakeListView.setAdapter(qAdapter);
         quakeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -80,6 +84,7 @@ public class MainActivity extends AppCompatActivity
                 startActivity(websiteIntent);
             }
         });
+
     }
 
     private class QuakeAsyncTask extends AsyncTask<String, Void, ArrayList<EarthQuake>>
@@ -99,8 +104,8 @@ public class MainActivity extends AppCompatActivity
             {
                 return;
             }
-
             updateUi(earthquake);
         }
     }
 }
+
