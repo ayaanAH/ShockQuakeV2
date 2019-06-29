@@ -1,9 +1,7 @@
 package com.example.shockquakev2;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
-import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.view.LayoutInflater;
@@ -13,15 +11,15 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class QuakeAdapter extends ArrayAdapter<EarthQuake>
 {
     private static final String SEP = "of";
     TextView magnitudeView, locationViewT, locationViewB, dateView, timeView;
 
-    public QuakeAdapter(Activity context, ArrayList<EarthQuake> numberList) {
+    public QuakeAdapter(Activity context, List<EarthQuake> numberList) {
         super(context,0,numberList);
     }
 

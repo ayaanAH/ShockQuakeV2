@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.shockquakev2">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -11,8 +12,12 @@
         android:roundIcon="@drawable/quakelogo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SettingsActivity"></activity>
-        <activity android:name=".MainActivity"></activity>
+        <activity
+            android:name=".MyPreferences"
+            android:label="@string/title_activity_my_preferences"></activity>
+        <activity android:name=".NoInternetActivity" />
+        <activity android:name=".SettingsActivity" />
+        <activity android:name=".MainActivity" />
         <activity android:name=".Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -31,6 +31,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Utility class with methods to help perform the HTTP request and
@@ -54,29 +55,23 @@ public final class Utils
     /**
      * Query the USGS dataset and return an {@link EarthQuake} object to represent a single earthquake.
      */
-    public static ArrayList<EarthQuake> fetchEarthquakeData(String requestUrl)
-    {
-
+    public static List<EarthQuake> fetchEarthquakeData(String requestUrl) {
         // Create URL object
         URL url = createUrl(requestUrl);
 
         // Perform HTTP request to the URL and receive a JSON response back
         String jsonResponse = null;
-        try
-        {
+        try {
             jsonResponse = makeHttpRequest(url);
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             Log.e(LOG_TAG, "Error closing input stream", e);
         }
 
         // Extract relevant fields from the JSON response and create an {@link Event} object
-        ArrayList<EarthQuake> quake = extractFeatureFromJson(jsonResponse);
+        List<EarthQuake> earthquake = extractFeatureFromJson(jsonResponse);
 
         // Return the {@link Event}
-        return quake;
-
+        return earthquake;
     }
 
     /**

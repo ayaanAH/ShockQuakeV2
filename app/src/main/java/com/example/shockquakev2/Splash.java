@@ -8,7 +8,6 @@ import android.view.View;
 
 public class Splash extends AppCompatActivity {
 
-    Handler handler;
 
     private static int TIME_OUT = 5000;
 
