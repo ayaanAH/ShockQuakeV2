@@ -6,4 +6,27 @@
     <string name="near">Near to</string>
     <string name="kilometer">km</string>
 
+
+
+
+
+
+
+
+    <!--Preferences Strings-->
+        <!--title-->
+    <string name="preference_title">Earthquake Preferences</string>
+        <!--Magnitude-->
+    <string name="preference_minimag_default">3</string>
+    <string name="preference_minimag_key">M</string>
+    <string name="preference_minimag_label">Minimum Magnitude</string>
+        <!--limit-->
+    <string name="preference_limit_label">Limit</string>
+    <string name="preference_limit_default">10</string>
+    <string name="preference_limit_key">L</string>
+        <!--order By-->
+    <string name="preference_orderby_label">Order By...</string>
+    <string name="preference_orderby_default">time</string>
+    <string name="preference_orderby_key">O</string>
+
 </resources>

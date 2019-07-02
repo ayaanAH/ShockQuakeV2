@@ -45,7 +45,7 @@ public final class Utils
 
     private  Utils()
     {
-        /*SingleTon design...
+        /**SingleTon design...
         *
         * no need to declare unnessary objects.
         *

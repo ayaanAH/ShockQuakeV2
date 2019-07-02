@@ -12,6 +12,10 @@
         android:roundIcon="@drawable/quakelogo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".PreferenceActivity">
+            <!--<meta-data android:name="android.support.PARENT_ACTIVITY"-->
+                <!--android:value=".MainActivity"/>-->
+        </activity>
         <activity android:name=".SettingsActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".Splash">

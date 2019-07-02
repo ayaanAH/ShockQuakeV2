@@ -2,10 +2,12 @@ package com.example.shockquakev2;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
@@ -31,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<List<EarthQuake>> {
 
     public static final String LOG_TAG = MainActivity.class.getName();
-    public static final String USGS_REQUEST_URL = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&orderby=time&minmag=1";
+    public static final String USGS_REQUEST_URL = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&orderby=time&minmag=5&limit=10";
 
     ListView quakeListView;
     QuakeAdapter adapter;
@@ -132,8 +134,19 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public Loader<List<EarthQuake>> onCreateLoader(int i, @Nullable Bundle bundle)
     {
+        String url = "https://earthquake.usgs.gov/fdsnws/event/1/query";
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String set_minMag = sharedPreferences.getString(getString(R.string.preference_minimag_key), getString(R.string.preference_minimag_default));
+        String set_limit = sharedPreferences.getString(getString(R.string.preference_limit_key), getString(R.string.preference_limit_default));
+        String set_orderBY = sharedPreferences.getString(getString(R.string.preference_orderby_key), getString(R.string.preference_orderby_default));
+        Uri baseUri = Uri.parse(url);
+        Uri.Builder uriBuilder = baseUri.buildUpon();
+        uriBuilder.appendQueryParameter("format","geojson");
+        uriBuilder.appendQueryParameter("orderby",set_orderBY);
+        uriBuilder.appendQueryParameter("limit",set_limit);
+        uriBuilder.appendQueryParameter("minmag",set_minMag);
         quakeListView.setEmptyView(pBar);
-        return new QuakeAsyncLoader(this, USGS_REQUEST_URL);
+        return new QuakeAsyncLoader(this, uriBuilder.toString());
 
     }
 
@@ -184,12 +197,10 @@ public class MainActivity extends AppCompatActivity implements
     {
         switch (item.getItemId()) {
             case R.id.refreshMenu:
-                Intent intent1 = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent1);
+                startActivity(new Intent(this, MainActivity.class));
                 return true;
             case R.id.settings:
-//                Intent intent2 = new Intent(this, MyPreferences.class);
-//                startActivity(intent2);
+                startActivity(new Intent(this, PreferenceActivity.class));
                 return true;
 
             default:

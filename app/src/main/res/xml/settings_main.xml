@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    android:title="@string/preference_title"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <EditTextPreference
+        android:key="@string/preference_minimag_key"
+        android:title="@string/preference_minimag_label"
+        android:inputType="numberDecimal"
+        android:defaultValue="@string/preference_minimag_default"
+        android:selectAllOnFocus="true"
+        />
+
+    <EditTextPreference
+        android:key="@string/preference_limit_key"
+        android:title="@string/preference_limit_label"
+        android:inputType="number"
+        android:defaultValue="@string/preference_limit_default"
+        android:selectAllOnFocus="true"
+        />
+
+    <ListPreference
+        android:key="@string/preference_orderby_key"
+        android:title="@string/preference_orderby_label"
+        android:defaultValue="@string/preference_orderby_default"
+        android:entries="@array/orderBy_names_array"
+        android:entryValues="@array/orderBy_values_array"
+        />
+
+</PreferenceScreen>
