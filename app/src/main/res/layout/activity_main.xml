@@ -1,22 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="10dp"
     android:orientation="vertical"
+    android:id="@+id/mainQuakeView"
     tools:context=".MainActivity">
 
-    <!--<android.support.v7.widget.SearchView-->
-        <!--android:id="@+id/search"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:clickable="true" />-->
 
     <ListView
         android:id="@+id/quakeList"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </ListView>
+    <ProgressBar android:id="@+id/listProgress"
+        android:layout_width="wrap_content"
+        android:indeterminate="true"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"/>
 
-</LinearLayout>
+    <TextView android:id="@+id/emptyMsg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="35sp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:layout_marginTop="5dp"
+        android:textColor="#990000"
+        android:fontFamily="sans-serif-smallcaps"
+        android:visibility="gone"
+        android:layout_centerInParent="true"/>
+
+</RelativeLayout>

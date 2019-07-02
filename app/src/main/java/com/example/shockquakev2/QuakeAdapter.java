@@ -17,6 +17,9 @@ import java.util.List;
 public class QuakeAdapter extends ArrayAdapter<EarthQuake>
 {
     private static final String SEP = "of";
+    private static final String TIME = "h:mm a";
+    private static final String DATE = "MM, DD, yyyy";
+    private static final String KILO_METER = "km";
     TextView magnitudeView, locationViewT, locationViewB, dateView, timeView;
 
     public QuakeAdapter(Activity context, List<EarthQuake> numberList) {
@@ -58,7 +61,7 @@ public class QuakeAdapter extends ArrayAdapter<EarthQuake>
         }
         else
         {
-            locationViewT.setText("Near to");
+            locationViewT.setText(R.string.near);
             locationViewB.setText(currentQuake.getLocation());
         }
         dateView.setText(dateTxt);
@@ -74,6 +77,11 @@ public class QuakeAdapter extends ArrayAdapter<EarthQuake>
         return String.valueOf(roundedOneDigitX);
     }
 
+    /**
+     *
+     * @param magnitude it is the magnitude of the current earthquake
+     * @return the background color.
+     */
     @RequiresApi(api = Build.VERSION_CODES.M)
     private int getMagnitudeColor(double magnitude)
     {
@@ -111,7 +119,7 @@ public class QuakeAdapter extends ArrayAdapter<EarthQuake>
 
     private boolean isContainKm(String location)
     {
-        if(location.contains("km"))
+        if(location.contains(KILO_METER))
             return true;
         return false;
     }
@@ -131,7 +139,7 @@ public class QuakeAdapter extends ArrayAdapter<EarthQuake>
     private String GetTime1(long date)
     {
         Date timeObject = new Date(date);
-        SimpleDateFormat timeFormat = new SimpleDateFormat("h:mm a");
+        SimpleDateFormat timeFormat = new SimpleDateFormat(TIME);
         String timeToDisplay = timeFormat.format(timeObject);
 
         return timeToDisplay;
@@ -140,7 +148,7 @@ public class QuakeAdapter extends ArrayAdapter<EarthQuake>
     private String GetDate1(long date)
     {
         Date dateObject = new Date(date);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MM, DD, yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat(DATE);
         String dateToDisplay = dateFormat.format(dateObject);
 
         return dateToDisplay;
