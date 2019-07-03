@@ -15,6 +15,7 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -32,8 +33,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<List<EarthQuake>> {
 
-    public static final String LOG_TAG = MainActivity.class.getName();
-    public static final String USGS_REQUEST_URL = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&orderby=time&minmag=5&limit=10";
+    public static final String USGS_REQUEST_URL = "https://earthquake.usgs.gov/fdsnws/event/1/query";
 
     ListView quakeListView;
     QuakeAdapter adapter;
@@ -77,6 +77,16 @@ public class MainActivity extends AppCompatActivity implements
             }
         });
 
+        /**
+         * Checks the internet connection and starts loader...
+         */
+        loaderCall();
+
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
+    private void loaderCall()
+    {
         if (isOnline())
         {
             getSupportLoaderManager().initLoader(0, null, this);
@@ -86,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements
          * text is displayed (No Internet Connection)
          */
         else
-            {
+        {
             MainQuake.setBackgroundResource(R.drawable.internet_o);
             msgTxt.setVisibility(View.VISIBLE);
             Toast.makeText(MainActivity.this, R.string.no_connection, Toast.LENGTH_LONG).show();
@@ -98,8 +108,6 @@ public class MainActivity extends AppCompatActivity implements
             params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
             msgTxt.setLayoutParams(params);
         }
-
-
     }
 
     //This method is called to initialise all the views in the activity.
@@ -134,19 +142,19 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public Loader<List<EarthQuake>> onCreateLoader(int i, @Nullable Bundle bundle)
     {
-        String url = "https://earthquake.usgs.gov/fdsnws/event/1/query";
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         String set_minMag = sharedPreferences.getString(getString(R.string.preference_minimag_key), getString(R.string.preference_minimag_default));
         String set_limit = sharedPreferences.getString(getString(R.string.preference_limit_key), getString(R.string.preference_limit_default));
         String set_orderBY = sharedPreferences.getString(getString(R.string.preference_orderby_key), getString(R.string.preference_orderby_default));
-        Uri baseUri = Uri.parse(url);
+        Uri baseUri = Uri.parse(USGS_REQUEST_URL);
         Uri.Builder uriBuilder = baseUri.buildUpon();
         uriBuilder.appendQueryParameter("format","geojson");
         uriBuilder.appendQueryParameter("orderby",set_orderBY);
         uriBuilder.appendQueryParameter("limit",set_limit);
         uriBuilder.appendQueryParameter("minmag",set_minMag);
+        String alteredUrl = uriBuilder.toString();
         quakeListView.setEmptyView(pBar);
-        return new QuakeAsyncLoader(this, uriBuilder.toString());
+        return new QuakeAsyncLoader(this, alteredUrl);
 
     }
 

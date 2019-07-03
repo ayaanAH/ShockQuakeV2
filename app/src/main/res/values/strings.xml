@@ -1,8 +1,12 @@
 <resources>
 
     <string name="app_name">ShockQuake Version 2.0</string>
+
+    <!--Empty Checks-->
     <string name="no_connection">No Internet Connection</string>
     <string name="no_data">No Earthquakes Available</string>
+
+    <!--Split String-->
     <string name="near">Near to</string>
     <string name="kilometer">km</string>
 
@@ -22,11 +26,18 @@
     <string name="preference_minimag_label">Minimum Magnitude</string>
         <!--limit-->
     <string name="preference_limit_label">Limit</string>
-    <string name="preference_limit_default">10</string>
+    <string name="preference_limit_default">5</string>
     <string name="preference_limit_key">L</string>
         <!--order By-->
     <string name="preference_orderby_label">Order By...</string>
     <string name="preference_orderby_default">time</string>
     <string name="preference_orderby_key">O</string>
+
+    <string name="preference_orderby_magnitude_label">Magnitude</string>
+    <string name="preference_orderby_magnitude_value" translatable="false">magnitude</string>
+
+
+    <string name="preference_orderby_most_recent_label">Most Recent</string>
+    <string name="preference_orderby_most_recent_value" translatable="false">time</string>
 
 </resources>

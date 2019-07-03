@@ -23,8 +23,8 @@
         android:key="@string/preference_orderby_key"
         android:title="@string/preference_orderby_label"
         android:defaultValue="@string/preference_orderby_default"
-        android:entries="@array/orderBy_names_array"
-        android:entryValues="@array/orderBy_values_array"
+        android:entries="@array/prference_orderby_labels"
+        android:entryValues="@array/prference_orderby_values"
         />
 
 </PreferenceScreen>

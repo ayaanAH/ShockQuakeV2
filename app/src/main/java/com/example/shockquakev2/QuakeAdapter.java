@@ -18,7 +18,7 @@ public class QuakeAdapter extends ArrayAdapter<EarthQuake>
 {
     private static final String SEP = "of";
     private static final String TIME = "h:mm a";
-    private static final String DATE = "MM, DD, yyyy";
+    private static final String DATE = "LLL, DD, yyyy";
     private static final String KILO_METER = "km";
     TextView magnitudeView, locationViewT, locationViewB, dateView, timeView;
 
